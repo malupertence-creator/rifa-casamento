@@ -36,12 +36,12 @@
       position: relative;
       width: 100%;
       min-height: 100svh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
       align-items: center;
-      justify-content: center;
+      justify-items: center;
       overflow: hidden;
-      padding: 40px 20px 60px;
+      padding: 40px 20px 32px;
     }
 
     .hero-folhas {
@@ -49,32 +49,38 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
+      object-fit: fill;
       z-index: 0;
-      opacity: 0.85;
+      opacity: 0.6;
     }
 
     .hero-monograma {
       position: relative;
       z-index: 1;
-      width: min(260px, 55vw);
+      width: min(200px, 42vw);
       height: auto;
-      margin-bottom: 16px;
-    }
-
-    .hero-casal {
-      position: relative;
-      z-index: 1;
-      width: min(280px, 60vw);
-      height: auto;
-      margin-bottom: 8px;
+      grid-row: 1;
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
       text-align: center;
+      grid-row: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hero-casal {
+      position: relative;
+      z-index: 1;
+      width: min(320px, 65vw);
+      height: auto;
+      grid-row: 3;
+      margin-top: 8px;
     }
 
     .hero-date {
@@ -377,6 +383,9 @@
       background: var(--cream);
       border-top: 1px solid var(--beige-light);
     }
+    .admin-section .section {
+      padding: 32px 24px;
+    }
     .admin-panel { display: none; }
     .admin-panel.visible { display: block; }
 
@@ -557,13 +566,13 @@
 <section class="hero">
   <img src="folhas.png" alt="" class="hero-folhas" />
   <img src="hero.png" alt="Monograma R&M" class="hero-monograma" />
-  <img src="casal.png" alt="Rafael e Maria Luiza" class="hero-casal" />
   <div class="hero-content">
     <p class="hero-date">02 · 10 · 2027</p>
     <h1 class="hero-title">RAFAEL &amp; MARIA LUIZA</h1>
     <p class="hero-sub">Rifa do nosso casamento</p>
     <a href="#participar" class="btn-primary">Participar</a>
   </div>
+  <img src="casal.png" alt="Rafael e Maria Luiza" class="hero-casal" />
 </section>
 
 <!-- SOBRE -->
