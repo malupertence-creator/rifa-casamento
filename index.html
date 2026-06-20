@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rifa — Rafael & Maria Luiza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:     #FFFFFF;
+      --cream:     #F7F4EF;
+      --sage:      #6B7F5E;
+      --sage-light:#8A9E7A;
+      --sage-muted:#C5D0BB;
+      --beige:     #C8B99A;
+      --beige-light:#E8DDD0;
+      --ink:       #3D4A35;
+      --ink-soft:  #6B7566;
+      --gold:      #B8996A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 48px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-date {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 8vw, 3.8rem);
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: var(--ink-soft);
+      margin-top: 8px;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--sage);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 36px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--ink); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 40px auto;
+      max-width: 320px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--beige);
+    }
+    .divider-icon { color: var(--beige); font-size: 1.1rem; }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-body {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* ── PRIZE CARD ── */
+    .prize-card {
+      background: var(--cream);
+      border: 1px solid var(--beige-light);
+      padding: 32px 28px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .prize-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--sage);
+    }
+    .prize-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 4px;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      background: var(--beige-light);
+      border: 1px solid var(--beige-light);
+      margin-bottom: 48px;
+    }
+    .stat-cell {
+      background: var(--white);
+      padding: 20px 12px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--sage);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* ── FORM ── */
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--beige-light);
+      background: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--sage); }
+
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '↓';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--sage);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    /* number search */
+    .num-search-wrap { display: flex; gap: 10px; margin-bottom: 16px; }
+    .num-search-wrap .form-input { margin-bottom: 0; }
+    .btn-search {
+      background: var(--sage-muted);
+      color: var(--white);
+      border: none;
+      padding: 0 18px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .btn-search:hover { background: var(--sage); }
+
+    /* grid of numbers */
+    .num-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+      gap: 6px;
+      margin-bottom: 20px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 4px 2px;
+    }
+    .num-btn {
+      aspect-ratio: 1;
+      border: 1px solid var(--beige-light);
+      background: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .num-btn:hover:not(.taken):not(.selected) { border-color: var(--sage); color: var(--sage); }
+    .num-btn.taken  { background: var(--beige-light); color: #aaa; cursor: not-allowed; border-color: var(--beige-light); }
+    .num-btn.paid   { background: var(--sage-muted); color: var(--white); border-color: var(--sage-muted); cursor: not-allowed; }
+    .num-btn.selected { background: var(--sage); color: var(--white); border-color: var(--sage); }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.1em;
+    }
+    .legend-dot {
+      width: 12px; height: 12px;
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── PIX CARD ── */
+    .pix-card {
+      background: var(--cream);
+      border: 1px solid var(--beige-light);
+      padding: 28px;
+      text-align: center;
+      margin-top: 28px;
+      display: none;
+    }
+    .pix-card.visible { display: block; }
+    .pix-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .pix-key {
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      background: var(--white);
+      border: 1px solid var(--beige-light);
+      padding: 10px 16px;
+      margin: 14px 0;
+      word-break: break-all;
+      color: var(--ink);
+    }
+    .btn-copy {
+      background: none;
+      border: 1px solid var(--sage);
+      color: var(--sage);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-copy:hover { background: var(--sage); color: var(--white); }
+
+    /* ── ALERT ── */
+    .alert {
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      margin-top: 14px;
+      display: none;
+    }
+    .alert.visible { display: block; }
+    .alert-success { background: #EAF2E7; color: var(--sage); border-left: 3px solid var(--sage); }
+    .alert-error   { background: #F9EDED; color: #9B4444; border-left: 3px solid #C86B6B; }
+    .alert-info    { background: var(--cream); color: var(--ink-soft); border-left: 3px solid var(--beige); }
+
+    /* ── ADMIN ── */
+    .admin-section {
+      background: var(--cream);
+      border-top: 1px solid var(--beige-light);
+    }
+    .admin-panel { display: none; }
+    .admin-panel.visible { display: block; }
+
+    .table-wrap { overflow-x: auto; margin-top: 24px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th {
+      text-align: left;
+      font-weight: 400;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--beige-light);
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--cream);
+      color: var(--ink);
+    }
+    tr:hover td { background: var(--white); }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+    }
+    .badge-pending { background: #FDF3DC; color: #9B7B30; }
+    .badge-paid    { background: #EAF2E7; color: var(--sage); }
+    .badge-cancelled { background: #F0F0F0; color: #888; }
+
+    .btn-sm {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-sm:hover { opacity: 0.8; }
+    .btn-confirm { background: var(--sage); color: var(--white); }
+    .btn-cancel  { background: #ddd; color: var(--ink-soft); }
+
+    .admin-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .filter-btn {
+      background: var(--white);
+      border: 1px solid var(--beige-light);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      cursor: pointer;
+      color: var(--ink-soft);
+      transition: all 0.2s;
+    }
+    .filter-btn.active { background: var(--sage); color: var(--white); border-color: var(--sage); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--beige);
+    }
+
+    /* ── LOADING ── */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+    #loading-screen.fade { opacity: 0; pointer-events: none; }
+    .loading-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--sage);
+      letter-spacing: 0.1em;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .loading-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--beige);
+      margin-top: 12px;
+    }
+    @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(61,74,53,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+      display: none;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: var(--white);
+      padding: 40px 36px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+    }
+    .modal h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+    .modal p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.7; }
+    .modal-actions { display: flex; gap: 12px; justify-content: center; }
+    .btn-outline {
+      background: none;
+      border: 1px solid var(--beige-light);
+      color: var(--ink-soft);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .num-grid { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading-screen">
+  <div class="loading-monogram">R &amp; M</div>
+  <div class="loading-sub">Carregando…</div>
+</div>
+
+<!-- MODAL DE CONFIRMAÇÃO -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Confirmar reserva</h3>
+    <p id="modal-body"></p>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="closeModal()">Voltar</button>
+      <button class="btn-primary" id="modal-confirm">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="fundo.png" alt="Rafael e Maria Luiza" class="hero-bg" />
+  <div class="hero-content">
+    <p class="hero-date">02 · 10 · 2027</p>
+    <h1 class="hero-title">RAFAEL &amp; MARIA LUIZA</h1>
+    <p class="hero-sub">Rifa do nosso casamento</p>
+    <a href="#participar" class="btn-primary">Participar</a>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="section">
+  <p class="section-label">Como funciona</p>
+  <h2 class="section-title">Cada número é uma chance de ganhar</h2>
+  <p class="section-body">
+    Escolha um ou mais números, faça o pagamento via PIX e torça muito.<br>
+    O sorteio acontece no dia do nosso casamento — e você pode acompanhar tudo aqui.
+  </p>
+
+  <div class="prize-card">
+    <div class="prize-value">R$ 20<span style="font-size:1.4rem">,00</span></div>
+    <div class="prize-label">por número · pagamento via PIX</div>
+  </div>
+
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-cell">
+      <span class="stat-num" id="stat-total">1200</span>
+      <span class="stat-label">números totais</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" id="stat-available">—</span>
+      <span class="stat-label">disponíveis</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" id="stat-sold">—</span>
+      <span class="stat-label">reservados</span>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPAR -->
+<section class="section" id="participar">
+  <div class="divider"><span class="divider-icon">✦</span></div>
+  <p class="section-label">Escolha seu número</p>
+  <h2 class="section-title">Reserve agora</h2>
+
+  <div class="num-search-wrap">
+    <input type="number" class="form-input" id="num-search" placeholder="Buscar número (ex: 42)" min="1" max="1200" />
+    <button class="btn-search" onclick="scrollToNumber()">Ir</button>
+  </div>
+
+  <div class="legend">
+    <span><span class="legend-dot" style="background:var(--white);border:1px solid var(--beige-light);"></span>Disponível</span>
+    <span><span class="legend-dot" style="background:var(--sage);"></span>Selecionado</span>
+    <span><span class="legend-dot" style="background:var(--beige-light);"></span>Reservado</span>
+    <span><span class="legend-dot" style="background:var(--sage-muted);"></span>Pago</span>
+  </div>
+
+  <div class="num-grid" id="num-grid">
+    <!-- números gerados por JS -->
+  </div>
+
+  <div id="selected-info" style="display:none;margin-bottom:16px;">
+    <div class="alert alert-info visible" id="selected-display"></div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Seu nome completo</label>
+    <input type="text" class="form-input" id="input-nome" placeholder="Nome Sobrenome" />
+  </div>
+  <div class="form-group">
+    <label class="form-label">WhatsApp</label>
+    <input type="tel" class="form-input" id="input-whatsapp" placeholder="(11) 99999-9999" />
+  </div>
+
+  <div id="alert-reserva" class="alert"></div>
+
+  <button class="btn-primary" style="width:100%;margin-top:8px;" onclick="openConfirmModal()">
+    Reservar número
+  </button>
+
+  <!-- PIX -->
+  <div class="pix-card" id="pix-card">
+    <p class="section-label" style="margin-bottom:6px;">Pagamento</p>
+    <h3>Pague via PIX</h3>
+    <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:6px;">
+      Após o pagamento, envie o comprovante via WhatsApp para confirmação.
+    </p>
+    <div class="pix-key" id="pix-key-display">SUA_CHAVE_PIX_AQUI</div>
+    <button class="btn-copy" onclick="copyPix()">Copiar chave PIX</button>
+    <p style="font-size:0.78rem;color:var(--ink-soft);margin-top:16px;">
+      Seu número fica reservado por <strong>48 horas</strong>.<br>
+      Após esse prazo sem confirmação, o número é liberado.
+    </p>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section class="section admin-section" id="admin">
+  <div class="divider"><span class="divider-icon">✦</span></div>
+  <p class="section-label">Área restrita</p>
+  <h2 class="section-title">Administração</h2>
+
+  <div id="admin-login">
+    <div class="form-group">
+      <label class="form-label">Senha de acesso</label>
+      <input type="password" class="form-input" id="admin-senha" placeholder="••••••" onkeydown="if(event.key==='Enter')adminLogin()" />
+    </div>
+    <div id="alert-admin" class="alert"></div>
+    <button class="btn-primary" style="margin-top:8px;" onclick="adminLogin()">Entrar</button>
+  </div>
+
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-filter">
+      <button class="filter-btn active" onclick="filterTable('all',this)">Todos</button>
+      <button class="filter-btn" onclick="filterTable('aguardando pagamento',this)">Aguardando</button>
+      <button class="filter-btn" onclick="filterTable('pago',this)">Pagos</button>
+      <button class="filter-btn" onclick="filterTable('cancelado',this)">Cancelados</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="admin-table">
+        <thead>
+          <tr>
+            <th>Nº</th>
+            <th>Nome</th>
+            <th>WhatsApp</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="admin-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Rafael &amp; Maria Luiza · 02.10.2027 · Feito com amor 🤍
+</footer>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, set, update, remove, push }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  // ─── CONFIGURAÇÃO FIREBASE ───────────────────────────────────────────────
+  // Substitua os valores abaixo pelos do seu projeto Firebase
+  const firebaseConfig = {
+    apiKey:            "SUA_API_KEY",
+    authDomain:        "SEU_PROJETO.firebaseapp.com",
+    databaseURL:       "https://SEU_PROJETO-default-rtdb.firebaseio.com",
+    projectId:         "SEU_PROJETO",
+    storageBucket:     "SEU_PROJETO.appspot.com",
+    messagingSenderId: "SEU_SENDER_ID",
+    appId:             "SEU_APP_ID"
+  };
+
+  const PIX_KEY   = "SUA_CHAVE_PIX_AQUI"; // ← sua chave PIX real
+  const ADMIN_PWD = "1234";               // ← troque por uma senha segura
+  const TOTAL     = 1200;
+
+  // ─── INIT ────────────────────────────────────────────────────────────────
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+  const rifaRef = ref(db, "rifas");
+
+  let allData   = {};   // { "42": { nome, whatsapp, status } }
+  let selected  = null; // número selecionado
+
+  document.getElementById("pix-key-display").textContent = PIX_KEY;
+
+  // ─── ESCUTA FIREBASE ─────────────────────────────────────────────────────
+  onValue(rifaRef, (snap) => {
+    allData = snap.val() || {};
+    renderGrid();
+    updateStats();
+    if (document.getElementById("admin-panel").classList.contains("visible")) {
+      renderAdminTable(currentFilter);
+    }
+    hideLoading();
+  });
+
+  function hideLoading() {
+    const ls = document.getElementById("loading-screen");
+    ls.classList.add("fade");
+    setTimeout(() => ls.remove(), 600);
+  }
+
+  // ─── GRID ────────────────────────────────────────────────────────────────
+  function renderGrid() {
+    const grid = document.getElementById("num-grid");
+    grid.innerHTML = "";
+    for (let i = 1; i <= TOTAL; i++) {
+      const d = allData[i];
+      const btn = document.createElement("button");
+      btn.className = "num-btn";
+      btn.textContent = String(i).padStart(4,"0");
+      btn.dataset.num = i;
+      btn.id = `num-${i}`;
+
+      if (d) {
+        btn.classList.add(d.status === "pago" ? "paid" : "taken");
+        btn.title = d.status === "pago"
+          ? `Pago — ${d.nome}`
+          : `Reservado — ${d.nome} (aguardando pagamento)`;
+      } else {
+        btn.onclick = () => selectNumber(i);
+      }
+
+      if (selected === i && !d) btn.classList.add("selected");
+      grid.appendChild(btn);
+    }
+  }
+
+  function selectNumber(n) {
+    selected = n;
+    renderGrid(); // re-render to update selected state
+    document.getElementById("selected-info").style.display = "block";
+    document.getElementById("selected-display").textContent =
+      `Número selecionado: ${String(n).padStart(4,"0")}`;
+    showAlert("alert-reserva","","");
+  }
+
+  window.scrollToNumber = function() {
+    const n = parseInt(document.getElementById("num-search").value);
+    if (n >= 1 && n <= TOTAL) {
+      const el = document.getElementById(`num-${n}`);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  // ─── STATS ───────────────────────────────────────────────────────────────
+  function updateStats() {
+    const taken = Object.keys(allData).length;
+    document.getElementById("stat-available").textContent = TOTAL - taken;
+    document.getElementById("stat-sold").textContent = taken;
+  }
+
+  // ─── RESERVA ─────────────────────────────────────────────────────────────
+  window.openConfirmModal = function() {
+    const nome   = document.getElementById("input-nome").value.trim();
+    const zap    = document.getElementById("input-whatsapp").value.trim();
+
+    if (!selected)  { showAlert("alert-reserva","alert-error","Selecione um número no grid acima."); return; }
+    if (!nome)      { showAlert("alert-reserva","alert-error","Preencha seu nome completo."); return; }
+    if (!zap)       { showAlert("alert-reserva","alert-error","Preencha seu WhatsApp."); return; }
+
+    if (allData[selected]) {
+      showAlert("alert-reserva","alert-error","Este número já foi reservado. Escolha outro.");
+      selected = null;
+      renderGrid();
+      return;
+    }
+
+    document.getElementById("modal-title").textContent = "Confirmar reserva";
+    document.getElementById("modal-body").textContent =
+      `Reservar o número ${String(selected).padStart(4,"0")} em nome de ${nome}?`;
+    document.getElementById("modal-confirm").onclick = () => doReserve(nome, zap);
+    document.getElementById("modal").classList.add("visible");
+  };
+
+  window.closeModal = function() {
+    document.getElementById("modal").classList.remove("visible");
+  };
+
+  async function doReserve(nome, zap) {
+    closeModal();
+    const n = selected;
+    await set(ref(db, `rifas/${n}`), {
+      nome,
+      whatsapp: zap,
+      status: "aguardando pagamento",
+      timestamp: Date.now()
+    });
+    showAlert("alert-reserva","alert-success",
+      `✓ Número ${String(n).padStart(4,"0")} reservado! Agora faça o pagamento via PIX abaixo.`);
+    document.getElementById("pix-card").classList.add("visible");
+    selected = null;
+    document.getElementById("input-nome").value = "";
+    document.getElementById("input-whatsapp").value = "";
+    document.getElementById("selected-info").style.display = "none";
+  }
+
+  // ─── PIX ─────────────────────────────────────────────────────────────────
+  window.copyPix = function() {
+    navigator.clipboard.writeText(PIX_KEY).then(() => {
+      const btn = document.querySelector(".btn-copy");
+      btn.textContent = "Copiado ✓";
+      setTimeout(() => btn.textContent = "Copiar chave PIX", 2000);
+    });
+  };
+
+  // ─── ADMIN ───────────────────────────────────────────────────────────────
+  let currentFilter = "all";
+
+  window.adminLogin = function() {
+    const pwd = document.getElementById("admin-senha").value;
+    if (pwd === ADMIN_PWD) {
+      document.getElementById("admin-login").style.display = "none";
+      document.getElementById("admin-panel").classList.add("visible");
+      renderAdminTable("all");
+    } else {
+      showAlert("alert-admin","alert-error","Senha incorreta.");
+    }
+  };
+
+  window.filterTable = function(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderAdminTable(f);
+  };
+
+  function renderAdminTable(filter) {
+    const tbody = document.getElementById("admin-tbody");
+    tbody.innerHTML = "";
+    const entries = Object.entries(allData);
+    const filtered = filter === "all" ? entries : entries.filter(([,v]) => v.status === filter);
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-soft);padding:24px;">Nenhum registro encontrado.</td></tr>`;
+      return;
+    }
+
+    filtered.sort(([a],[b]) => a - b).forEach(([num, data]) => {
+      const statusLabel = {
+        "aguardando pagamento": "<span class='badge badge-pending'>Aguardando</span>",
+        "pago":      "<span class='badge badge-paid'>Pago</span>",
+        "cancelado": "<span class='badge badge-cancelled'>Cancelado</span>"
+      }[data.status] || data.status;
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><strong>${String(num).padStart(4,"0")}</strong></td>
+        <td>${data.nome}</td>
+        <td><a href="https://wa.me/55${data.whatsapp.replace(/\D/g,'')}" target="_blank" style="color:var(--sage)">${data.whatsapp}</a></td>
+        <td>${statusLabel}</td>
+        <td style="display:flex;gap:6px;flex-wrap:wrap;">
+          ${data.status !== "pago"      ? `<button class="btn-sm btn-confirm" onclick="adminConfirm(${num})">Confirmar</button>` : ""}
+          ${data.status !== "cancelado" ? `<button class="btn-sm btn-cancel"  onclick="adminCancel(${num})">Cancelar</button>`  : ""}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.adminConfirm = async function(num) {
+    if (!confirm(`Confirmar pagamento do número ${String(num).padStart(4,"0")}?`)) return;
+    await update(ref(db, `rifas/${num}`), { status: "pago" });
+  };
+
+  window.adminCancel = async function(num) {
+    if (!confirm(`Cancelar e liberar o número ${String(num).padStart(4,"0")}?`)) return;
+    await remove(ref(db, `rifas/${num}`));
+  };
+
+  // ─── UTIL ────────────────────────────────────────────────────────────────
+  function showAlert(id, cls, msg) {
+    const el = document.getElementById(id);
+    el.className = `alert${cls ? " "+cls+" visible" : ""}`;
+    el.textContent = msg;
+  }
+</script>
+</body>
+</html>
