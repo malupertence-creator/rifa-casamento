@@ -31,6 +31,24 @@
       min-height: 100vh;
     }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('folhas.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.18;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -45,13 +63,7 @@
     }
 
     .hero-folhas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      z-index: 0;
-      opacity: 0.6;
+      display: none;
     }
 
     .hero-monograma {
@@ -384,7 +396,14 @@
       border-top: 1px solid var(--beige-light);
     }
     .admin-section .section {
-      padding: 32px 24px;
+      padding: 24px 24px 32px;
+    }
+    .admin-section .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .admin-section .divider {
+      margin: 16px auto;
     }
     .admin-panel { display: none; }
     .admin-panel.visible { display: block; }
@@ -569,7 +588,7 @@
   <div class="hero-content">
     <p class="hero-date">02 · 10 · 2027</p>
     <h1 class="hero-title">RAFAEL &amp; MARIA LUIZA</h1>
-    <p class="hero-sub">Rifa do nosso casamento</p>
+    <p class="hero-sub">Participe e ajude a celebrar o nosso amor</p>
     <a href="#participar" class="btn-primary">Participar</a>
   </div>
   <img src="casal.png" alt="Rafael e Maria Luiza" class="hero-casal" />
@@ -585,7 +604,7 @@
   </p>
 
   <div class="prize-card">
-    <div class="prize-value">R$ 20<span style="font-size:1.4rem">,00</span></div>
+    <div class="prize-value">R$ 15<span style="font-size:1.4rem">,00</span></div>
     <div class="prize-label">por número · pagamento via PIX</div>
   </div>
 
