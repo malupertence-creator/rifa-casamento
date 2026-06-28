@@ -36,10 +36,10 @@
       position: fixed;
       inset: 0;
       background-image: url('folhas.png');
-      background-size: 480px auto;
+      background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.45;
+      opacity: 0.55;
       z-index: 0;
       pointer-events: none;
     }
@@ -53,12 +53,10 @@
     .hero {
       position: relative;
       width: 100%;
-      min-height: 100svh;
       display: grid;
       grid-template-rows: auto auto auto;
       align-items: center;
       justify-items: center;
-      overflow: hidden;
       padding: 32px 20px 0px;
     }
 
@@ -396,14 +394,17 @@
       border-top: 1px solid var(--beige-light);
     }
     .admin-section .section {
-      padding: 24px 24px 32px;
+      padding: 20px 24px 24px;
     }
     .admin-section .section-title {
-      font-size: 1.4rem;
-      margin-bottom: 6px;
+      font-size: 1.3rem;
+      margin-bottom: 4px;
     }
     .admin-section .divider {
-      margin: 16px auto;
+      margin: 12px auto;
+    }
+    #admin-login .form-group {
+      margin-bottom: 10px;
     }
     .admin-panel { display: none; }
     .admin-panel.visible { display: block; }
