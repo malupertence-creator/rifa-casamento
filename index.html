@@ -34,10 +34,29 @@
     body::before {
       content: '';
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: -2%;
+      width: 54%;
+      height: 100%;
       background-image: url('folhas.png');
-      background-size: 100% 100%;
-      background-position: center;
+      background-size: 200% 100%;
+      background-position: left center;
+      background-repeat: no-repeat;
+      opacity: 0.55;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      right: -2%;
+      width: 54%;
+      height: 100%;
+      background-image: url('folhas.png');
+      background-size: 200% 100%;
+      background-position: right center;
       background-repeat: no-repeat;
       opacity: 0.55;
       z-index: 0;
